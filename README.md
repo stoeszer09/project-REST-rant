@@ -5,6 +5,7 @@ REST-Rant is an app where users can review restaurants.
 
 As a User I need submission area so I can RANT ABOUT THIS AWFUL RESTAURANT >:( .
 
+## Routes
 
 | Method        | Path                          | Purpose
 | :---          |     :---:                     |     :---:
@@ -21,9 +22,15 @@ As a User I need submission area so I can RANT ABOUT THIS AWFUL RESTAURANT >:( .
 | GET           | *                             | 404 page (matches any route not defined above)
 
 
+## Database
+
 Places (Restaurants)
-- name (string)
-- city (string)
-- state (string)
-- cuisines (string)
-- pic (string)
+
+| Field        | Type
+| :---         |     :---:
+| _id          |   Object ID
+| name         | String
+| city         | String
+| state        | String
+| cuisine      | String
+| pic          | String
