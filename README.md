@@ -34,3 +34,4 @@ Places (Restaurants)
 | state        | String
 | cuisine      | String
 | pic          | String
+| founded      | Number
