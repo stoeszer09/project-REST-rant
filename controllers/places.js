@@ -1,18 +1,29 @@
 const router = require('express').Router()
 const places = require('../models/places.js')
 
+// Create a NEW place Route
 router.get('/new', (req, res) => {
   res.render('places/new')
 })
 
+// EDIT a place Route
 router.get('/:id/edit', (req, res) => {
-  res.send('<h1>this is the GET /:id/edit route</h1>')
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+    res.render('error404')
+  } else if (!places[id]) {
+    res.render('error404')
+  } else {
+    res.render('places/edit', {place: places[id]})
+  }
 })
+
 
 router.post('/:id/rant', (req, res) => {
   res.send('<h1>This is the POST /:id/rant route</h1>')
 })
 
+// SHOW route to show an index
 router.get('/:id', (req, res) => {
   let id = Number(req.params.id)
   if (isNaN(id)) {
@@ -24,6 +35,7 @@ router.get('/:id', (req, res) => {
   }
 })
 
+// When DELETING a place go back to the index page
 router.delete('/:id', (req, res) => {
   let id = Number(req.params.id)
   if (isNaN(id)) {
@@ -40,6 +52,7 @@ router.put('/:id', (req, res) => {
   res.send('<h1>This is the PUT /:id</h1>')
 })
 
+// Base INDEX Route
 router.post('/', (req, res) => {
   console.log(req.body)
   if (!req.body.pic) {
