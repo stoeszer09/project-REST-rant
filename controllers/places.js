@@ -14,7 +14,14 @@ router.post('/:id/rant', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  res.send('<h1>THis is GET /:id page</h1>')
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+    res.render('error404')
+  } else if (!places[id]) {
+    res.render('error404')
+  } else {
+    res.render('places/show', { place: places[id]})
+  }
 })
 
 router.put('/:id', (req, res) => {
