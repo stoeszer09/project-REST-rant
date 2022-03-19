@@ -14,13 +14,36 @@ router.get('/:id/edit', (req, res) => {
   } else if (!places[id]) {
     res.render('error404')
   } else {
-    res.render('places/edit', {place: places[id]})
+    res.render('places/edit', {place: places[id], id})
   }
 })
 
 
 router.post('/:id/rant', (req, res) => {
   res.send('<h1>This is the POST /:id/rant route</h1>')
+})
+
+// PUT Route for when the edits are saved
+router.put('/:id', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+    res.render('error404')
+  } else if (!places[id]) {
+    res.render('error404')
+  } else {
+    if (!req.body.pic) {
+      req.body.pic = 'http://placekitten.com/400/400'
+    }
+    if (!req.body.city) {
+      req.body.city = 'Anytown'
+    }
+    if (!req.body.state) {
+      req.body.state = 'USA'
+    }
+
+    places[id] = req.body
+    res.redirect(`/places/${id}`)
+  }
 })
 
 // SHOW route to show an index
@@ -46,10 +69,6 @@ router.delete('/:id', (req, res) => {
     places.splice(id, 1)
     res.redirect('/places')
   }
-})
-
-router.put('/:id', (req, res) => {
-  res.send('<h1>This is the PUT /:id</h1>')
 })
 
 // Base INDEX Route
