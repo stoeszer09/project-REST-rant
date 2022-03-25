@@ -28,10 +28,22 @@ Places (Restaurants)
 
 | Field        | Type
 | :---         |     :---:
-| _id          |   Object ID
+| _id          | Object ID
 | name         | String
 | city         | String
 | state        | String
 | cuisine      | String
 | pic          | String
 | founded      | Number
+
+## Rants
+
+Rants/Raves (Comments)
+
+| Field        | Type
+| :---         |     :---:
+| _id          | Object ID
+| author       | String
+| rant         | Boolean
+| stars        | Number
+| content      | String
