@@ -55,10 +55,10 @@ function show (data) {
                     </h4>
 
                     <div>
-                       <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+                       <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
                         Edit
                         </a>
-                        <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+                        <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                             <button type="submit" className="btn btn-danger">
                                 Delete
                             </button>
@@ -72,7 +72,65 @@ function show (data) {
                 </h2>
                 {comments}
             </div>
-            
+
+            <div>
+                <h2>Got Your Own Rant or Rave?</h2>
+                <form method="POST" action={`/places/${data.place.id}/rant`}>
+                    <div className="row">
+                        <div className="form-group">
+                            <label htmlFor="content">Content</label>
+                            <input 
+                                className="form-control"
+                                id="content"
+                                name="content"
+                                type="text"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="form-group col">
+                            <label htmlFor="author">Author</label>
+                            <input 
+                                className="form-control"
+                                id="author"
+                                name="author"
+                                type="text"
+                            />
+                        </div>
+
+                        <div className="form-group col">
+                            <label htmlFor="stars">Star Rating</label>
+                            <input 
+                                className="form-range"
+                                id="stars"
+                                name="stars"
+                                type="range"
+                                min="1"
+                                max="5"
+                                step="0.5"
+                            />
+                        </div>
+
+                        <div className="form-group col"> 
+                            <label htmlFor="rant">Rant?</label>
+                            <br />
+                            <input 
+                                id="rant"
+                                name="rant"
+                                type="checkbox"
+                                checked
+                            />
+                        </div>
+                    </div>
+
+                    <input 
+                        className="btn btn-primary"
+                        type="submit"
+                        value="Add Comment"
+                    />
+                </form>
+            </div>
           </main>
         </Def>
     )

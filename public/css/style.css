@@ -41,3 +41,6 @@ main {
   margin-left: 20px;
   background-color: white;
 }
+.form-group {
+  padding: 1em 2em 1em 2em;
+}
