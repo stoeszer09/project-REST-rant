@@ -53,7 +53,20 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// UPDATE
+// EDIT - page view
+router.get('/:id/edit', async (req, res) => {
+  try {
+    let place = await db.Place.findById(req.params.id)
+    res.render('places/edit', {
+      place
+    })
+  } catch(e) {
+    console.log('error', e)
+    res.render('error404')
+  }
+})
+
+// UPDATE - db
 router.put('/:id', async (req, res) => {
   try {
     await db.Place.findByIdAndUpdate(req.params.id, req.body)
@@ -64,24 +77,23 @@ router.put('/:id', async (req, res) => {
   }
 })
 
+// DELETE rant
+router.delete('/:id/comment/:rantId', async (req, res) => {
+  try {
+    await db.Comment.findByIdAndDelete(req.params.rantId)
+    let place = await db.Place.findById(req.params.id)
+    console.log('place ===>', place.comments)
+    res.render('places/show')
+  } catch(e) {
+    res.render('error404')
+  }
+})
+
 // DELETE place
 router.delete('/:id', async (req, res) => {
   try {
     await db.Place.findByIdAndDelete(req.params.id)
     res.redirect('/places')
-  } catch(e) {
-    console.log('error', e)
-    res.render('error404')
-  }
-})
-
-// EDIT page view
-router.get('/:id/edit', async (req, res) => {
-  try {
-    let place = await db.Place.findById(req.params.id)
-    res.render('places/edit', {
-      place
-    })
   } catch(e) {
     console.log('error', e)
     res.render('error404')
@@ -108,11 +120,6 @@ router.post('/:id/rant', (req, res) => {
     .catch(err => {
       res.render('error404')
     })
-})
-
-// DELETE rant
-router.delete('/:id/rant/:rantId', (req, res) => {
-    res.send('GET /places/:id/rant/:rantId stub')
 })
 
 module.exports = router

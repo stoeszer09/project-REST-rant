@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Comment = require('./comment')
 
 const placeSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -17,5 +18,15 @@ const placeSchema = new mongoose.Schema({
 placeSchema.methods.showEstablished = function() {
   return `${this.name} has been serving ${this.city}, ${this.state} since ${this.founded}.`
 }
+
+// Hook to delete comments if place is deleted
+placeSchema.post('findOneAndDelete', function() {
+  Comment.deleteMany({
+    comment: this._conditions._id
+  })
+    .then(deleteStatus => {
+      console.log(deleteStatus)
+    })
+})
 
 module.exports = mongoose.model('Place', placeSchema)
