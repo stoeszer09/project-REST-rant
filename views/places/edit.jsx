@@ -6,7 +6,7 @@ function edit_form (data) {
         <Def>
           <main>
             <h1>Edit Place</h1>
-            <form method="POST" action={`/places/${data.id}?_method=PUT`}>
+            <form method="POST" action={`/places/${data.place.id}?_method=PUT`}>
                 <div className="row">
                     <div className="form-group col-sm-6">
                         <label htmlFor="name">Place Name</label>
@@ -17,6 +17,7 @@ function edit_form (data) {
                             value={data.place.name}
                         required/>
                     </div>
+
                     <div className="form-group col-sm-6">
                         <label htmlFor="pic">Picture</label>
                         <input 
@@ -27,6 +28,7 @@ function edit_form (data) {
                             value={data.place.pic}/>
                     </div>
                 </div>
+
                 <div className="row">
                     <div className="form-group col-sm-6">
                         <label htmlFor="city">City</label>
@@ -36,6 +38,7 @@ function edit_form (data) {
                             name="city" 
                             value={data.place.city}/>
                     </div>
+
                     <div className="form-group col-sm-6">
                         <label htmlFor="state">State</label>
                         <input 
@@ -45,7 +48,9 @@ function edit_form (data) {
                             value={data.place.state}/>
                     </div>
                 </div>
-                    <div className="form-group">
+
+                <div className='row'>
+                    <div className="form-group col-sm-6">
                         <label htmlFor="cuisines">Cuisines</label>
                         <input 
                             className="form-control" 
@@ -54,6 +59,17 @@ function edit_form (data) {
                             value={data.place.cuisines}
                             required/>
                     </div>
+
+                    <div className="form-group col-sm-6">
+                        <label htmlFor="founded">Founded</label>
+                        <input 
+                            className="form-control" 
+                            id="founded" 
+                            name="founded" 
+                            value={data.place.founded}
+                            required/>
+                    </div>
+                </div>
                 <input 
                     className="btn btn-primary" 
                     type="submit" 
