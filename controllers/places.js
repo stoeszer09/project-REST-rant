@@ -82,11 +82,14 @@ router.delete('/:id/comment/:rantId', async (req, res) => {
   try {
     await db.Comment.findByIdAndDelete(req.params.rantId)
     let place = await db.Place.findById(req.params.id)
-    console.log('place ===>', place.comments)
-    res.render('places/show')
+    await place.populate('comments') // The comment IDs are still on the Place, but this is just preventing it from populating as it points to nothing in Comments DB.
+                                     // Not sure how to actually remove the comments: [new ObjectId("6244a2de7a61c2bfce728960")] from the place Document...
+    res.render('places/show', { place })
   } catch(e) {
     res.render('error404')
   }
+
+  // res.render('places/show', {})
 })
 
 // DELETE place

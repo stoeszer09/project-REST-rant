@@ -25,7 +25,7 @@ placeSchema.post('findOneAndDelete', function() {
     comment: this._conditions._id
   })
     .then(deleteStatus => {
-      console.log(deleteStatus)
+      console.log('Comments have been deleted.')
     })
 })
 
